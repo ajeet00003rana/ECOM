@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Models", "Project.M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.DataAccess", "Project.DataAccess\Project.DataAccess.csproj", "{BE895B68-E8B7-4ADE-BF4B-76F65D75E667}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.BusinessLogic", "Project.BusinessLogic\Project.BusinessLogic.csproj", "{58ACAE5C-78A5-4F72-8A99-F0432C281E0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BE895B68-E8B7-4ADE-BF4B-76F65D75E667}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE895B68-E8B7-4ADE-BF4B-76F65D75E667}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE895B68-E8B7-4ADE-BF4B-76F65D75E667}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58ACAE5C-78A5-4F72-8A99-F0432C281E0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58ACAE5C-78A5-4F72-8A99-F0432C281E0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58ACAE5C-78A5-4F72-8A99-F0432C281E0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58ACAE5C-78A5-4F72-8A99-F0432C281E0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -24,8 +24,5 @@ namespace Project.DataAccess.Services
 
             return projects;
         }
-
-
-
     }
 }
