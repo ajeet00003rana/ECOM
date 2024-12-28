@@ -1,6 +1,8 @@
 using Project.Server.Configuration;
 using Serilog;
 using Microsoft.Extensions.Caching.StackExchangeRedis;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +28,17 @@ builder.Services.AddStackExchangeRedisCache(options =>
     options.InstanceName = "ProductCache_"; // Optional: Prefix for keys in Redis
 });
 
+// Add API versioning
+builder.Services.AddApiVersioning(options =>
+{
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.ReportApiVersions = true;
+});
+
+
+
+
 //Custom Configuration start
 
 builder.ConfigureDBAndIdentity();
@@ -39,6 +52,12 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// Configure routing for versioning
+builder.Services.AddVersionedApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV"; // e.g., "v1", "v2"
+    options.SubstituteApiVersionInUrl = true;
+});
 
 var app = builder.Build();
 

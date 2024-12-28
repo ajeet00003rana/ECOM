@@ -5,7 +5,9 @@ using Project.Models.ViewModel;
 
 namespace Project.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/category")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
@@ -56,8 +58,19 @@ namespace Project.Server.Controllers
             return Ok(category);
         }
 
+
         [HttpGet("GetAll")]
+        [ApiExplorerSettings(GroupName = "v1")]
         public async Task<IActionResult> GetAll()
+        {
+            var categories = await _categoryService.GetAllAsync();
+            return Ok(categories);
+        }
+
+        [HttpGet("GetAll")]
+        [MapToApiVersion("2.0")]
+        [ApiExplorerSettings(GroupName = "v2")]
+        public async Task<IActionResult> GetAllV2()
         {
             var categories = await _categoryService.GetAllAsync();
             return Ok(categories);
