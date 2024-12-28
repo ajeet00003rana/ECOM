@@ -1,5 +1,8 @@
-﻿using Project.DataAccess.DBContext;
+﻿using Microsoft.Extensions.Caching.Distributed;
+using Project.DataAccess.DBContext;
 using Project.Models.EntityModels;
+using System.Collections.Generic;
+using System.Text.Json;
 
 namespace Project.DataAccess.Services
 {
@@ -11,13 +14,35 @@ namespace Project.DataAccess.Services
 
     public class ProductService : Service<Product>, IProductService
     {
-        public ProductService(IRepository<Product> repository) : base(repository)
+        private readonly IDistributedCache _cache;
+        public ProductService(IRepository<Product> repository,
+            IDistributedCache cache) : base(repository)
         {
+            _cache = cache;
         }
 
         public async Task<IEnumerable<Product>> GetProductsAsync(string search = null, int? categoryId = null, decimal? priceRange = null)
         {
-            var products = await _repository.GetAllAsync();
+            string cacheKey = "AllProducts";
+            IEnumerable<Product> products = Enumerable.Empty<Product>();
+
+            try
+            {
+                string cachedProduct = await _cache.GetStringAsync(cacheKey);
+
+                if (!string.IsNullOrEmpty(cachedProduct))
+                {
+                    products = JsonSerializer.Deserialize<IEnumerable<Product>>(cachedProduct);
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+            if (products.Count() == 0)
+            {
+                products = await _repository.GetAllAsync();
+            }
 
             if (!string.IsNullOrEmpty(search))
                 products = products.Where(p => p.Name.Contains(search) || p.Description.Contains(search));

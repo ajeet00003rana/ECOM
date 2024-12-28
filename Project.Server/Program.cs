@@ -1,5 +1,7 @@
 using Project.Server.Configuration;
 using Serilog;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,14 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 // Seri-log end
+
+// Configure Redis connection
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    // Replace with your Redis server details (this is an example connection string)
+    options.Configuration = "localhost:6379"; // Change to your Redis server address
+    options.InstanceName = "ProductCache_"; // Optional: Prefix for keys in Redis
+});
 
 //Custom Configuration start
 
