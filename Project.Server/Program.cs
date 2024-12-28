@@ -8,9 +8,10 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 var builder = WebApplication.CreateBuilder(args);
 
 
+#region Custom configuration
 //Seri-log start
 Log.Logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(builder.Configuration) 
+    .ReadFrom.Configuration(builder.Configuration)
     .Enrich.FromLogContext()
     .WriteTo.Console()
     .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
@@ -20,44 +21,22 @@ builder.Host.UseSerilog();
 
 // Seri-log end
 
-// Configure Redis connection
-builder.Services.AddStackExchangeRedisCache(options =>
-{
-    // Replace with your Redis server details (this is an example connection string)
-    options.Configuration = "localhost:6379"; // Change to your Redis server address
-    options.InstanceName = "ProductCache_"; // Optional: Prefix for keys in Redis
-});
+builder.ConfigureRedis();
 
-// Add API versioning
-builder.Services.AddApiVersioning(options =>
-{
-    options.AssumeDefaultVersionWhenUnspecified = true;
-    options.DefaultApiVersion = new ApiVersion(1, 0);
-    options.ReportApiVersions = true;
-});
-
-
-
-
-//Custom Configuration start
 
 builder.ConfigureDBAndIdentity();
 builder.RegisterJwt();
 builder.Services.RegisterServices();
 
+// Add API versioning
+builder.ConfigureVersioning(); 
+
+#endregion
+
 //Custom Configuration end
 
 // Add services to the container.
 builder.Services.AddControllers();
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-// Configure routing for versioning
-builder.Services.AddVersionedApiExplorer(options =>
-{
-    options.GroupNameFormat = "'v'VVV"; // e.g., "v1", "v2"
-    options.SubstituteApiVersionInUrl = true;
-});
 
 var app = builder.Build();
 
