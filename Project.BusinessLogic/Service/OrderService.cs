@@ -1,4 +1,5 @@
-﻿using Project.DataAccess.DBContext;
+﻿using Project.BusinessLogic.Email;
+using Project.DataAccess.DBContext;
 using Project.Models.EntityModels;
 
 namespace Project.DataAccess.Services
@@ -14,16 +15,19 @@ namespace Project.DataAccess.Services
     public class OrderService : IOrderService
     {
         private readonly IRepository<Order> _repository;
+        private readonly IEmailBackgroundService _emailBackgroundService;
 
-        public OrderService(IRepository<Order> repository)
+        public OrderService(IRepository<Order> repository, IEmailBackgroundService emailBackgroundService)
         {
             _repository = repository;
+            _emailBackgroundService = emailBackgroundService;
         }
 
         public async Task<Order> PlaceOrderAsync(Order order)
         {
             await _repository.InsertAsync(order);
 
+            _emailBackgroundService.QueueEmail("test@example.com", "test");
             // Deduct stock for each product in OrderDetails
             //foreach (var item in order.OrderDetails)
             //{
