@@ -10,10 +10,13 @@ namespace Project.Server.Controllers
     public class TestingController : ControllerBase
     {
         private readonly IProjectService _service;
+        private readonly ILogger<TestingController> _logger;
 
-        public TestingController(IProjectService service)
+        public TestingController(IProjectService service, ILogger<TestingController> logger)
         {
             _service = service;
+            _logger = logger;
+
         }
 
         /// <summary>
@@ -28,6 +31,7 @@ namespace Project.Server.Controllers
         [HttpGet]
         public IQueryable<Models.EntityModels.Project> GetProjects()
         {
+            _logger.LogInformation("Fetching project data.");
             //return await _service.GetAllAsync();
             return _service.GetAllProject();
         }

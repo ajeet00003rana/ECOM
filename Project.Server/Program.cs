@@ -1,25 +1,32 @@
 using Project.Server.Configuration;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+//Seri-log start
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration) 
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
+
+// Seri-log end
+
 //Custom Configuration start
 
-/// <summary>
-/// update your DB in connection string and run update-database in Project.DataAccess
-/// </summary>
-/// <param name="builder"></param>
-/// 
 builder.ConfigureDBAndIdentity();
 builder.RegisterJwt();
 builder.Services.RegisterServices();
 
 //Custom Configuration end
 
-
 // Add services to the container.
 builder.Services.AddControllers();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -36,6 +43,10 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+//Register custom middleware start
+app.RegisterMiddleware();
+//Register custom middleware end
 
 app.MapControllers();
 
