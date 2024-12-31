@@ -1,12 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
 using Moq;
-using Project.DataAccess.DBContext;
 using Project.DataAccess.Services;
-using Xunit;
 
 namespace BusinessLogic.Tests.Service
 {
