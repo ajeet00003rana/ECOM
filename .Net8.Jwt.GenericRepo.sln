@@ -15,8 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Tests", "_Tests", "{34A32D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic.Tests", "_Tests\BusinessLogic.Tests\BusinessLogic.Tests\BusinessLogic.Tests.csproj", "{953EC989-E0DC-447E-AB5C-259F356A1192}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Server.Tests", "_Tests\Project.Server.Tests\Project.Server.Tests\Project.Server.Tests.csproj", "{975D0C86-6073-40B8-ACA9-0D89EE0211E9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,17 +41,12 @@ Global
 		{953EC989-E0DC-447E-AB5C-259F356A1192}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{953EC989-E0DC-447E-AB5C-259F356A1192}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{953EC989-E0DC-447E-AB5C-259F356A1192}.Release|Any CPU.Build.0 = Release|Any CPU
-		{975D0C86-6073-40B8-ACA9-0D89EE0211E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{975D0C86-6073-40B8-ACA9-0D89EE0211E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{975D0C86-6073-40B8-ACA9-0D89EE0211E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{975D0C86-6073-40B8-ACA9-0D89EE0211E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{953EC989-E0DC-447E-AB5C-259F356A1192} = {34A32D18-63CB-4146-BE8C-408294E0F1E5}
-		{975D0C86-6073-40B8-ACA9-0D89EE0211E9} = {34A32D18-63CB-4146-BE8C-408294E0F1E5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DB70EB72-2C80-45F1-BE7D-A7ECF387B292}
