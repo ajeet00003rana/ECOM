@@ -29,11 +29,19 @@ builder.RegisterJwt();
 builder.Services.RegisterServices();
 
 // Add API versioning
-builder.ConfigureVersioning(); 
+builder.ConfigureVersioning();
 
 #endregion
 
 //Custom Configuration end
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin", policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    });
+});
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -55,6 +63,8 @@ app.UseAuthorization();
 //Register custom middleware start
 app.RegisterMiddleware();
 //Register custom middleware end
+
+app.UseCors("AllowSpecificOrigin");
 
 app.MapControllers();
 
