@@ -1,9 +1,10 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Project.BusinessLogic.Service.Email;
 using System.Collections.Concurrent;
 
-namespace Project.BusinessLogic.Email
+namespace Project.BusinessLogic.Service.BackgroundJobs
 {
     public interface IEmailBackgroundService
     {

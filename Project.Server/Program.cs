@@ -1,8 +1,5 @@
 using Project.Server.Configuration;
 using Serilog;
-using Microsoft.Extensions.Caching.StackExchangeRedis;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 
 var builder = WebApplication.CreateBuilder(args);

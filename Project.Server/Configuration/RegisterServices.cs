@@ -1,7 +1,8 @@
 ﻿using Project.Server.Auth;
 using Project.DataAccess.Services;
 using Project.BusinessLogic.Service;
-using Project.BusinessLogic.Email;
+using Project.BusinessLogic.Service.Email;
+using Project.BusinessLogic.Service.BackgroundJobs;
 
 namespace Project.Server.Configuration
 {

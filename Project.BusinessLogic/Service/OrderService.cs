@@ -1,4 +1,4 @@
-﻿using Project.BusinessLogic.Email;
+﻿using Project.BusinessLogic.Service.BackgroundJobs;
 using Project.DataAccess.DBContext;
 using Project.Models.EntityModels;
 
@@ -16,11 +16,15 @@ namespace Project.DataAccess.Services
     {
         private readonly IRepository<Order> _repository;
         private readonly IEmailBackgroundService _emailBackgroundService;
+        private readonly IOrderBackgroundService _orderBackgroundService;
+        private readonly IProductService _productService;
 
-        public OrderService(IRepository<Order> repository, IEmailBackgroundService emailBackgroundService)
+        public OrderService(IRepository<Order> repository, IEmailBackgroundService emailBackgroundService, IProductService productService, IOrderBackgroundService orderBackgroundService)
         {
             _repository = repository;
             _emailBackgroundService = emailBackgroundService;
+            _productService = productService;
+            _orderBackgroundService = orderBackgroundService;
         }
 
         public async Task<Order> PlaceOrderAsync(Order order)
@@ -28,15 +32,7 @@ namespace Project.DataAccess.Services
             await _repository.InsertAsync(order);
 
             _emailBackgroundService.QueueEmail("test@example.com", "test");
-            // Deduct stock for each product in OrderDetails
-            //foreach (var item in order.OrderDetails)
-            //{
-            //    var product = await _repository.GetByIdAsync(item.ProductId);
-            //    if (product == null) throw new KeyNotFoundException($"Product {item.ProductId} not found.");
-
-            //    product.StockCount -= item.Quantity;
-            //    await _repository.UpdateAsync(product);
-            //}
+            _orderBackgroundService.Execute(order);
 
             return order;
         }

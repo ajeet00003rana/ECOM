@@ -1,4 +1,4 @@
-﻿namespace Project.BusinessLogic.Email
+﻿namespace Project.BusinessLogic.Service.Email
 {
     public interface IEmailService
     {

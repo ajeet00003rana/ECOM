@@ -1,9 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using Project.BusinessLogic.Email;
+using Project.BusinessLogic.Service.BackgroundJobs;
+using Project.BusinessLogic.Service.Email;
 
 
-namespace BusinessLogic.Tests.Email
+namespace BusinessLogic.Tests.Service.BackgroundJobs
 {
     public class EmailBackgroundServiceTests
     {

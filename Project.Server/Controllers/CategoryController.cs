@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Project.DataAccess.Services;
+using Project.Models.Auth;
 using Project.Models.EntityModels;
 using Project.Models.ViewModel;
 
@@ -9,6 +11,7 @@ namespace Project.Server.Controllers
     [ApiVersion("2.0")]
     [Route("api/v{version:apiVersion}/category")]
     [ApiController]
+    [Authorize(Roles = UserRoles.Admin)]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;

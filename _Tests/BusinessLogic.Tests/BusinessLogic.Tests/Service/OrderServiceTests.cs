@@ -1,5 +1,5 @@
 ﻿using Moq;
-using Project.BusinessLogic.Email;
+using Project.BusinessLogic.Service.BackgroundJobs;
 using Project.DataAccess.DBContext;
 using Project.DataAccess.Services;
 using Project.Models.EntityModels;
@@ -10,13 +10,17 @@ namespace BusinessLogic.Tests.Service
     {
         private readonly Mock<IRepository<Order>> _mockRepository;
         private readonly Mock<IEmailBackgroundService> _mockEmailService;
+        private readonly Mock<IOrderBackgroundService> _mockOrderService;
+        private readonly Mock<IProductService> _productService;
         private readonly IOrderService _orderService;
 
         public OrderServiceTests()
         {
             _mockRepository = new Mock<IRepository<Order>>();
             _mockEmailService = new Mock<IEmailBackgroundService>();
-            _orderService = new OrderService(_mockRepository.Object, _mockEmailService.Object);
+            _mockOrderService = new Mock<IOrderBackgroundService>();
+            _productService = new Mock<IProductService>();
+            _orderService = new OrderService(_mockRepository.Object, _mockEmailService.Object, _productService.Object, _mockOrderService.Object);
         }
 
         [Fact]

@@ -1,6 +1,6 @@
-﻿using Project.BusinessLogic.Email;
+﻿using Project.BusinessLogic.Service.Email;
 
-namespace BusinessLogic.Tests.Email
+namespace BusinessLogic.Tests.Service.Email
 {
     public class EmailServiceTests
     {
